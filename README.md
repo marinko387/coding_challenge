@@ -1,24 +1,18 @@
-# README
+# Coding Challenge
+To complete the task of the coding challenge, the Metric class and the three methods were created as requested. In addition to the tests with Rspec on the Metric model
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Typical Example
 
-Things you may want to cover:
+Metric.most_bookmarked_projects('cl',6)
 
-* Ruby version
+Metric.best_performant_sites(6)
 
-* System dependencies
+Metric.bookmarks_per_month(6)
 
-* Configuration
 
-* Database creation
+rspec spec/models/metric_spec.rb
 
-* Database initialization
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
 
-* ...
