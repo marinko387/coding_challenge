@@ -1,5 +1,5 @@
 # Coding Challenge
-To complete the task of the coding challenge, the Metric class and the three methods were created as requested. In addition to the tests with Rspec on the Metric model
+To complete the task of the coding challenge, the Metric class and the three methods were created as requested. In addition to the tests with Rspec on the Metric model.
 
 ## Typical Example
 
