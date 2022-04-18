@@ -26,10 +26,10 @@ class Metric
   def best_performant_sites(month)
     projects = get_projects
     projects = projects.select  { |project| project['created_at'].to_date.month == month }
-
-
-
-    return projects
+    projects = projects.map    { |project| project['sites'].map { |site| [site,project['pageviews']] }   }
+    projects = projects.flatten(1)
+    projects = projects.group_by(&:first).map{ |x, y| [y.inject(0){ |sum, i| sum + i.last }, x] }
+    return projects.sort_by { |el| el[0] }.reverse
   end
 
   def bookmarks_per_month(month)
@@ -38,9 +38,5 @@ class Metric
     projects = projects.map     { |project|  {  :bookmarks_count => project['bookmarks'].count } }
     return  projects.inject(0){|sum,x| sum + x[:bookmarks_count].to_i }
   end
-
-  
-
-  
 
 end
