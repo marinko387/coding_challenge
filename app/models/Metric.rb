@@ -5,7 +5,7 @@ class Metric
 
   include ActiveModel::Model
 
-  def get_projects
+  def self.get_projects
   	uri = URI('https://api.github.com/gists/47740d1d76f06aa8ced9a0db448e90a5')
 	  request = Net::HTTP.get_response(uri)  
 	  data = JSON.parse(request.body) if request.is_a?(Net::HTTPSuccess)
@@ -13,7 +13,7 @@ class Metric
 	  return projects
   end
 
-  def most_bookmarked_projects(site, month)
+  def self.most_bookmarked_projects(site, month)
   	projects = get_projects
     projects = projects.select  { |project| project['created_at'].to_date.month == month }
     projects = projects.keep_if { |project| project['sites'].include? site }
@@ -23,7 +23,7 @@ class Metric
     return projects
   end
 
-  def best_performant_sites(month)
+  def self.best_performant_sites(month)
     projects = get_projects
     projects = projects.select  { |project| project['created_at'].to_date.month == month }
     projects = projects.map    { |project| project['sites'].map { |site| [site,project['pageviews']] }   }
@@ -32,7 +32,7 @@ class Metric
     return projects.sort_by { |el| el[0] }.reverse
   end
 
-  def bookmarks_per_month(month)
+  def self.bookmarks_per_month(month)
     projects = get_projects
     projects = projects.select  { |project| project['created_at'].to_date.month == month }
     projects = projects.map     { |project|  {  :bookmarks_count => project['bookmarks'].count } }
