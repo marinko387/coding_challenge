@@ -23,4 +23,24 @@ class Metric
     return projects
   end
 
+  def best_performant_sites(month)
+    projects = get_projects
+    projects = projects.select  { |project| project['created_at'].to_date.month == month }
+
+
+
+    return projects
+  end
+
+  def bookmarks_per_month(month)
+    projects = get_projects
+    projects = projects.select  { |project| project['created_at'].to_date.month == month }
+    projects = projects.map     { |project|  {  :bookmarks_count => project['bookmarks'].count } }
+    return  projects.inject(0){|sum,x| sum + x[:bookmarks_count].to_i }
+  end
+
+  
+
+  
+
 end
